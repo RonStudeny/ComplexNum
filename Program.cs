@@ -11,33 +11,40 @@ namespace ComplexNum
 
             ComplexNum res;
 
-            res = num1.AddNums(num2);
+            res = num1.AddNums(num2); //scitani priklad
             Console.WriteLine(res.ToString());
+            res = num1.SubstractNums(num2); // odcitani priklad
+            Console.WriteLine(res.ToString());
+            res = num1.MultiplyNums(num2); // nasobeni priklad
+            Console.WriteLine(res.ToString()); 
+            res = num1.ComplexPair(num2);
+            Console.WriteLine(res.ToString());
+          
         }
     }
 
     public class ComplexNum
     {
-        int Im { get; set; }
         int Re { get; set; }
-        public ComplexNum(int imNum, int reNum)
+        int Im { get; set; }
+        public ComplexNum(int reNum, int imNum)
         {
-            Im = imNum;
             Re = reNum;
+            Im = imNum;
         }
 
         public ComplexNum AddNums(ComplexNum input)
         {
-            ComplexNum res = new ComplexNum(Im, Re);
+            ComplexNum res = new ComplexNum(Re, Im);
             
-            res.Re += input.Re;
-            res.Im += input.Im;
+            res.Re = res.Re + input.Re;
+            res.Im = res.Im + input.Im;
             return res;
         }
 
         public ComplexNum SubstractNums(ComplexNum input)
         {
-            ComplexNum res = new ComplexNum(Im, Re);
+            ComplexNum res = new ComplexNum(Re, Im);
 
             res.Re -= input.Re;
             res.Im -= input.Im;
@@ -46,15 +53,15 @@ namespace ComplexNum
 
         public ComplexNum MultiplyNums(ComplexNum input)
         {
-            ComplexNum res = new ComplexNum(Im, Re);
+            ComplexNum res = new ComplexNum(Re, Im);
 
             res.Re = (Re * input.Re) - (Im * input.Im);
-            res.Im = (Re * input.Im) + (Re * input.Im + input.Re * Im);
+            res.Im = (Re * input.Im) + (input.Re * Im);
             return res;
         }
         public ComplexNum ComplexPair(ComplexNum input)
         {
-            ComplexNum res = new ComplexNum(Im, Re);
+            ComplexNum res = new ComplexNum(Re, Im);
 
             res.Im = Im * -1;
             return res;
@@ -62,7 +69,7 @@ namespace ComplexNum
 
         public ComplexNum DivNums(ComplexNum input)
         {
-            ComplexNum res = new ComplexNum(Im, Re);
+            ComplexNum res = new ComplexNum(Re, Im);
             ComplexNum pair = res.ComplexPair(input);
             ComplexNum multiplyResUp = MultiplyNums(pair);
             ComplexNum multiplyResDown = input.MultiplyNums(pair);
@@ -74,11 +81,12 @@ namespace ComplexNum
 
         public override string ToString()
         {
-            string res;
-            if (Im > 0) res = $"{Re} + {Im}i ";
-            if (Im < 0) res = $"{Re} - {Im * -1}i";
-            else res = Re.ToString();
-            return res;
+            if (Im > 0) return $"{Re} + {Im}i ";
+            if (Im < 0) return $"{Re} - {Im * -1}i";
+            else return Re.ToString();
         }
+
+        
+        
     }
 }
