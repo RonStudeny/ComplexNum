@@ -17,7 +17,9 @@ namespace ComplexNum
             Console.WriteLine(res.ToString());
             res = num1.MultiplyNums(num2); // nasobeni priklad
             Console.WriteLine(res.ToString()); 
-            res = num1.ComplexPair(num2);
+            res = num1.ComplexPair(); // sdruzene cislo pro num1
+            Console.WriteLine(res.ToString());
+            res = num1.DivNums(num2); // deleni priklad
             Console.WriteLine(res.ToString());
           
         }
@@ -25,9 +27,9 @@ namespace ComplexNum
 
     public class ComplexNum
     {
-        int Re { get; set; }
-        int Im { get; set; }
-        public ComplexNum(int reNum, int imNum)
+        double Re { get; set; }
+        double Im { get; set; }
+        public ComplexNum(double reNum, double imNum)
         {
             Re = reNum;
             Im = imNum;
@@ -59,7 +61,7 @@ namespace ComplexNum
             res.Im = (Re * input.Im) + (input.Re * Im);
             return res;
         }
-        public ComplexNum ComplexPair(ComplexNum input)
+        public ComplexNum ComplexPair()
         {
             ComplexNum res = new ComplexNum(Re, Im);
 
@@ -70,12 +72,12 @@ namespace ComplexNum
         public ComplexNum DivNums(ComplexNum input)
         {
             ComplexNum res = new ComplexNum(Re, Im);
-            ComplexNum pair = res.ComplexPair(input);
+            ComplexNum pair = input.ComplexPair();
             ComplexNum multiplyResUp = MultiplyNums(pair);
             ComplexNum multiplyResDown = input.MultiplyNums(pair);
 
             res.Re = multiplyResUp.Re / multiplyResDown.Re;
-            res.Im = multiplyResUp.Im/multiplyResDown.Im;
+            res.Im = multiplyResUp.Im/multiplyResDown.Re;
             return res;
         }
 
@@ -84,9 +86,7 @@ namespace ComplexNum
             if (Im > 0) return $"{Re} + {Im}i ";
             if (Im < 0) return $"{Re} - {Im * -1}i";
             else return Re.ToString();
-        }
-
-        
+        }  
         
     }
 }
